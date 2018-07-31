@@ -13,6 +13,7 @@ import redis
 from config import Conf
 
 
+
 def create_app():
     app = Flask(__name__)
     app.config.from_object(Conf)
@@ -31,6 +32,12 @@ app = create_app()
 
 @app.route('/')
 def index():
+
+    return "hello world"
+
+@app.route('/addscheduler')
+def addscheduler():
+    from vender import scheduler
     return "hello world"
 
 if __name__ == '__main__':
