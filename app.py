@@ -31,7 +31,7 @@ app = create_app()
 @app.route('/')
 def index():
 
-    return "hello world"
+    return "Flask is God"
 
 @app.route('/addscheduler')
 def addscheduler():
