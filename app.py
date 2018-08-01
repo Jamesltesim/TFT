@@ -15,7 +15,7 @@ from config import Conf
 def create_app():
     app = Flask(__name__)
     app.config.from_object(Conf)
-    app.redis_store = redis.Redis(host=app.config["REDIS_HOST"], port=app.config["REDIS_PORT"], decode_responses=True)
+    app.redis_store = redis.Redis(host=app.config["REDIS_HOST"], port=app.config["REDIS_PORT"], db=4, password='dahai123')
 
     from api.v1_0_0.view import api_v1_0_0 as api_1_0_blueprint
     app.register_blueprint(api_1_0_blueprint, url_prefix='/api/v1.0.0')
