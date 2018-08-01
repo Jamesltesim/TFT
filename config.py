@@ -11,7 +11,7 @@ class Config(object):
 class DevelopmentConfig(Config):
     DEBUG = True
 
-    REDIS_HOST = 'localhost'
+    REDIS_HOST = '192.168.56.104'
     REDIS_PORT = 6379
     REDIS_DB = 4
     REDIS_PASSWORD = '123456'
