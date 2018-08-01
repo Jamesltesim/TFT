@@ -13,9 +13,23 @@ pip install -r requirements.txt
 
 
 
-2.开启 virtualenv
-pip3 install virtualenv
+2.virtualenv
 
-virtualenv --no-site-packages venv
+    1）安装virtualenv
 
-source venv/bin/activate
+    pip install --upgrade pip
+    pip install virtualenv
+
+    2）创建一个使用python3的虚拟环境：
+
+    virtualenv -p /usr/bin/python3 py35env
+
+    3）激活py35env虚拟环境：
+    source py35env/bin/active
+
+
+
+
+3.mysql
+根据脚本生成表
+mysql> source /home/james/python/TFT/mysql.sql
