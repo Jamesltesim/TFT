@@ -58,10 +58,11 @@ def login():
     encryption_str = request.get_json().get('encryption_str')
     password = request.get_json().get('password')
     user = User.query.filter_by(phone_number=phone_number).first()
-    password_in_sql = user.password
+
     if not user:
         return jsonify({'code': 0, 'message': '没有此用户'})
 
+    password_in_sql = user.password
     # if user.password != password:
     #     return jsonify({'code': 0, 'message': '密码错误'})
 
