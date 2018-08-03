@@ -38,6 +38,14 @@ def addscheduler():
     from vender import scheduler
     return "hello world"
 
+# 后台系统
+
+from flask_admin import Admin
+admin = Admin(app,name=u'后台管理系统')
+from admin.views import MyView
+admin.add_view(MyView(name=u'Hello'))
+
+
 if __name__ == '__main__':
 
     app.run(debug=app.config["DEBUG"], host='0.0.0.0', port=5001)

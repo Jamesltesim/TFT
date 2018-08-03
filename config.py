@@ -16,7 +16,7 @@ class DevelopmentConfig(Config):
     REDIS_DB = 4
     REDIS_PASSWORD = '123456'
 
-    MYSQL_INFO = "mysql+pymysql://root:123456@localhost:3306/test01?charset=utf8"
+    MYSQL_INFO = "mysql+pymysql://root:12345678@localhost:3306/test01?charset=utf8"
 
 
 class ProductionConfig(Config):
@@ -27,6 +27,6 @@ class ProductionConfig(Config):
     REDIS_DB = 4
     REDIS_PASSWORD = '123456'
 
-    MYSQL_INFO = "mysql+pymysql://root:123456@192.168.56.102:3306/test01?charset=utf8"
+    MYSQL_INFO = "mysql+pymysql://root:12345678@192.168.56.102:3306/test01?charset=utf8"
 
 Conf = DevelopmentConfig

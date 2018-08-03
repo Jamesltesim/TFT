@@ -2,6 +2,16 @@
 2018/8/1
 
 
+
+gunicorn 守护进程开启
+gunicorn -D -b localhost:5001 app:app
+
+杀死gunicorn进程
+ps -e |grep gunicorn|awk '{print $1}'|xargs kill -9
+
+
+
+
 1
 生成requirements.txt文件
 
