@@ -2,7 +2,7 @@ import hashlib
 from functools import wraps
 import time
 from flask import request, jsonify, current_app, g
-from api.model import User,db_session
+from admin.model import User,db_session
 
 
 
@@ -40,8 +40,6 @@ def login_check(f):
 
 @api_v1_0_0.route('/')
 def hello_world():
-    from unitTests.user_test import APITest
-
     # api = APITest('http://127.0.0.1:5001')
     # data = api.login('12345678901', '123456')
     # print(data.get('message'))
@@ -55,7 +53,7 @@ def hello_world():
 def login():
 
     phone_number = request.get_json().get('phone_number')
-    encryption_str = request.get_json().get('encryption_str')
+    encryption_str = request.get_json().get('password')
     password = request.get_json().get('password')
     user = User.query.filter_by(phone_number=phone_number).first()
 
@@ -68,11 +66,12 @@ def login():
 
     # encryption_str就是加密串，是由密码 + 随机值 + 时间戳用sha256加密的。传到服务器，服务器也这样加密一下，然后看看2者是不是一致。传输过程不涉及密码传输。
     s = hashlib.sha256()
-    s.update(password_in_sql)
+    s.update(password_in_sql.encode("utf8"))
     # s.update(random_str)
     # s.update(time_stamp)
     server_encryption_str = s.hexdigest()
 
+    print(server_encryption_str,encryption_str)
     if server_encryption_str != encryption_str:
         return jsonify({'code': 0, 'message': '密码错误'})
 

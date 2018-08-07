@@ -1,4 +1,5 @@
 # coding:utf-8
+from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import create_engine, ForeignKey, Column, Integer, String, Text, DateTime,\
     and_, or_, SmallInteger, Float, DECIMAL, desc, asc, Table, join, event
 from sqlalchemy.orm import relationship, backref, sessionmaker, scoped_session, aliased, mapper

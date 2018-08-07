@@ -10,6 +10,9 @@ import redis
 # sys.path.append(root)
 # from api.model import Base
 # target_metadata = Base.metadata
+from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import create_engine
+
 from config import Conf
 
 def create_app():
@@ -27,6 +30,8 @@ def create_app():
 
 
 app = create_app()
+# engine = create_engine(Conf.MYSQL_INFO, pool_recycle=7200)
+# db = SQLAlchemy(app)
 
 @app.route('/')
 def index():
