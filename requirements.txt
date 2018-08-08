@@ -7,6 +7,10 @@ chardet==3.0.4
 click==6.7
 cryptography==2.3
 Flask==1.0.2
+Flask-Admin==1.5.1
+Flask-Migrate==2.2.1
+Flask-Script==2.0.6
+Flask-SQLAlchemy==2.3.2
 gunicorn==19.9.0
 idna==2.7
 itsdangerous==0.24
@@ -26,3 +30,4 @@ SQLAlchemy==1.2.10
 tzlocal==1.5.1
 urllib3==1.23
 Werkzeug==0.14.1
+WTForms==2.2.1

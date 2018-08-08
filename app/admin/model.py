@@ -1,6 +1,6 @@
 # coding:utf-8
 
-from sqlalchemy import  ForeignKey, Column, Integer, String, Text, DateTime
+from sqlalchemy import  ForeignKey, Column, Integer, String, VARCHAR, DateTime
 import datetime
 
 
@@ -25,10 +25,10 @@ class User(db.Model):
 
     id = Column('id', Integer, primary_key=True)
     phone_number = Column('phone_number', String(11), index=True)
-    password = Column('password', String(30))
-    nickname = Column('nickname', String(30), index=True, nullable=True)
+    password = Column('password', VARCHAR(40))
+    nickname = Column('nickname', VARCHAR(30), index=True, nullable=True)
     register_time = Column('register_time', DateTime, index=True, default=datetime.datetime.now)
-
+    nickn = Column('nickname1', VARCHAR(30), index=True, nullable=True)
     # head_picture = Column('head_picture', String(100), default='')
 
 # if __name__ == '__main__':
