@@ -28,7 +28,7 @@ class User(db.Model):
     password = Column('password', VARCHAR(40))
     nickname = Column('nickname', VARCHAR(30), index=True, nullable=True)
     register_time = Column('register_time', DateTime, index=True, default=datetime.datetime.now)
-    nickn = Column('nickname1', VARCHAR(30), index=True, nullable=True)
+    # nickn = Column('nickname1', VARCHAR(30), index=True, nullable=True)
     # head_picture = Column('head_picture', String(100), default='')
 
 # if __name__ == '__main__':

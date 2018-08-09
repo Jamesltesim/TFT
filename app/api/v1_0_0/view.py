@@ -46,6 +46,16 @@ def hello_world():
 
     return app.hello_world()
 
+@api_v1_0_0.route('/add')
+def add():
+    user = User()
+    user.phone_number = 11
+    user.nickname = 'aa'
+    from app import db
+
+    db.session.add(user)
+    db.session.commit()
+    return jsonify({'code':1})
 
 # 上次登录接口不安全，要修改一下。一般来说，验证时，都是把用户名，和 密码+随机值+时间戳 的加密方式传过去
 # cryption_str就是加密串，是由密码+随机值+时间戳用sha256加密的。传到服务器，服务器也这样加密一下，然后看看2者是不是一致。传输过程不涉及密码传输。就这么简单。
@@ -117,13 +127,13 @@ def logout():
 
 @api_v1_0_0.before_request
 def before_request():
-    token = request.headers.get('token')
-    phone_number = current_app.redis_store.get('token:%s' % token)
-
-    print(token,phone_number)
-    if phone_number:
-        g.current_user = User.query.filter_by(phone_number=phone_number).first()
-        g.token = token
+    # token = request.headers.get('token')
+    # phone_number = current_app.redis_store.get('token:%s' % token)
+    #
+    # print(token,phone_number)
+    # if phone_number:
+    #     g.current_user = User.query.filter_by(phone_number=phone_number).first()
+    #     g.token = token
     return
 
 # @api_v1_0_0.teardown_request

@@ -46,8 +46,6 @@ app = create_app()
 @app.route('/')
 def index():
 
-    from app.vender import mail
-    mail.sendMail()
     return "Flask is God  Do you know?"
 
 @app.route('/addscheduler')
