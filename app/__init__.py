@@ -4,7 +4,7 @@ from flask import Flask
 import redis
 from flask_sqlalchemy import SQLAlchemy
 
-from config import Conf
+from app.config import Conf
 
 
 db = SQLAlchemy()
@@ -19,6 +19,11 @@ def create_app():
     app.config['SQLALCHEMY_DATABASE_URI'] = Conf.MYSQL_INFO
     app.config['SQLALCHEMY_COMMIT_ON_TEARDOWN'] = True
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+    # Mail
+    app.config['MAIL_SERVER'] = Conf.MAIL_SERVER
+    app.config['MAIL_PORT'] = Conf.MAIL_PORT
+    app.config['MAIL_USE_TLS'] = Conf.MAIL_USE_TLS
 
 
     # 蓝图
@@ -41,6 +46,8 @@ app = create_app()
 @app.route('/')
 def index():
 
+    from app.vender import mail
+    mail.sendMail()
     return "Flask is God  Do you know?"
 
 @app.route('/addscheduler')
