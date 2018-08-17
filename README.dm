@@ -91,7 +91,7 @@ Credit_bills_details.no==Card_trans_details.trans_no).join(Cards,Card_trans_deta
 #服务器压力测试工具
 ##################################################################################
 
-一、http_load
+一、http_load(仅支持 get请求   这个项目是在http_load基础上开发的支持 post的工具 https://github.com/Jamesltesim/http-load)
 程序非常小，解压后也不到100K
 http_load以并行复用的方式运行，用以测试web服务器的吞吐量与负载。
 但是它不同于大多数压力测试工具，它可以以一个单一的进程运行，一般不会把客户机搞死。
