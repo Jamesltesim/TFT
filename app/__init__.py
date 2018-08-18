@@ -12,7 +12,7 @@ db = SQLAlchemy()
 def create_app():
     app = Flask(__name__)
     app.config.from_object(Conf)
-
+    print('create_app')
     # redis
     app.redis_store = redis.Redis(host=app.config["REDIS_HOST"], port=app.config["REDIS_PORT"], decode_responses=True)
 
