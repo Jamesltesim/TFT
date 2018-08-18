@@ -106,9 +106,10 @@ def login():
 @api_v1_0_0.route('/user')
 @login_check
 def user():
-
+    print('user接口 入口')
     user = g.current_user
     nickname = current_app.redis_store.hget('user:%s' % user.phone_number, 'nickname')
+    print('user接口 返回 数据')
     return jsonify({'code': 1, 'nickname': nickname, 'phone_number': user.phone_number})
 
 
