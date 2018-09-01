@@ -44,4 +44,4 @@ class ProductionConfig(Config):
     # app.config['MAIL_USE_SSL'] = True
     MAIL_USE_TLS = True
 
-Conf = DevelopmentConfig
+Conf = DevelopmentConfig()

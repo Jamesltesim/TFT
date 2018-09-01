@@ -1,7 +1,8 @@
 # coding:utf-8
+from datetime import datetime
 
 from sqlalchemy import  ForeignKey, Column, Integer, String, VARCHAR, DateTime
-import datetime
+
 
 
 
@@ -27,7 +28,7 @@ class User(db.Model):
     phone_number = Column('phone_number', String(11), index=True)
     password = Column('password', VARCHAR(40))
     nickname = Column('nickname', VARCHAR(30), index=True, nullable=True)
-    register_time = Column('register_time', DateTime, index=True, default=datetime.datetime.now)
+    register_time = Column('register_time',DateTime, default=datetime.now())
     # nickn = Column('nickname1', VARCHAR(30), index=True, nullable=True)
     # head_picture = Column('head_picture', String(100), default='')
 

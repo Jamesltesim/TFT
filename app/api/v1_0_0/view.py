@@ -50,6 +50,7 @@ def hello_world():
 def add():
     user = User()
     user.phone_number = 11
+    user.password = '111'
     user.nickname = 'aa'
     from app import db
 
