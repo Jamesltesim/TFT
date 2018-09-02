@@ -2,12 +2,10 @@
 from flask import Flask
 
 import redis
-from flask_sqlalchemy import SQLAlchemy
 
 from app.config import Conf
+from app.vender.db import db
 
-
-db = SQLAlchemy()
 
 def create_app():
     app = Flask(__name__)
