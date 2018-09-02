@@ -1,13 +1,10 @@
+# coding:utf-8
 import hashlib
 
 from flask import request, jsonify, current_app, g
 import time
-
-from app import db
 from app.admin.model import *
 from app.api.code_msg import *
-
-
 
 
 
@@ -18,6 +15,11 @@ class Model_v1_0_0:
     def hello_world(self):
         return 'v1.0.0'
 
+    # 获取活动页列表
+    def activityList(self):
+        pass
+
+    # 首页获取列表
     def homeList(self):
         list = db.session.query(Commodity).all()
         dict = {}
@@ -39,7 +41,6 @@ class Model_v1_0_0:
             obj_dict["price"] = obj.price
             obj_dict["category"] = key
             array.append(obj_dict)
-
 
         # print(dict)
         return jsonify({code:'200',"data":dict})
