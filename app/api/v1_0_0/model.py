@@ -3,6 +3,10 @@ import hashlib
 from flask import request, jsonify, current_app, g
 import time
 
+from app import db
+from app.admin.model import User
+from app.api.code_msg import *
+
 
 class Model_v1_0_0:
     def __init__(self):
@@ -19,6 +23,19 @@ class Model_v1_0_0:
         phone_number = current_app.redis_store.get('token:%s' % token)
         if not phone_number or token != current_app.redis_store.hget('user:%s' % phone_number, 'token'):
             return jsonify({'code': 2, 'message': '验证信息错误'})
+
+
+    def register(self):
+        phone_number = request.get_json().get('phone_number')
+        passwd = request.get_json().get('password')
+        user = User(phone_number,passwd)
+        try:
+            db.session.add(user)
+            db.session.commit()
+            return jsonify({code: register_succeed})
+        except Exception as e:
+            print(e)
+            return jsonify({code:register_failure,msg:register_failure_msg})
 
 
     def login(self,user,password,phone_number):
@@ -71,3 +88,6 @@ class Model_v1_0_0:
         pipline.execute()
 
         return jsonify({'code': 1, 'message': '成功注销'})
+
+    def homeList(self):
+        pass

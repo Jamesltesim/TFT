@@ -18,7 +18,7 @@ class DevelopmentConfig(Config):
     REDIS_PASSWORD = '123456'
 
     # Mysql
-    MYSQL_INFO = "mysql+pymysql://root:12345678@localhost:3306/test01?charset=utf8"
+    MYSQL_INFO = "mysql+pymysql://root:12345678@localhost:3306/fruit_dj?charset=utf8"
 
 
     # Mail

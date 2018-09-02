@@ -116,15 +116,20 @@ def before_request():
     #     g.token = token
     return
 
+
+@api_v1_0_0.route('/register',methods=['POST'])
+def register():
+
+    return model.register()
+
+
 @api_v1_0_0.teardown_request
 def handle_teardown_request(exception):
     db.session.remove()
 
 @api_v1_0_0.route('/add')
 def add():
-    user = User()
-    user.phone_number = 22
-    user.password = '22'
+    user = User(22,'22')
     user.nickname = 'bb'
 
 
