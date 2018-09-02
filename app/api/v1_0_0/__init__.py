@@ -5,8 +5,6 @@ from app.admin.model import User
 
 api_v1_0_0 = Blueprint('api_v1_0_0',__name__)
 
-
-
 import hashlib
 from functools import wraps
 
@@ -20,6 +18,13 @@ from . import api_v1_0_0
 from ..v1_0_0.model import Model_v1_0_0
 
 model = Model_v1_0_0()
+
+
+@api_v1_0_0.route('/homelist')
+def homeList():
+    return model.homeList()
+
+
 
 def login_check(f):
     @wraps(f)

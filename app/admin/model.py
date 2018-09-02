@@ -1,11 +1,8 @@
 # coding:utf-8
 from datetime import datetime
 
-from sqlalchemy import  ForeignKey, Column, Integer, String, VARCHAR, DateTime
-
-
-
-
+from sqlalchemy import ForeignKey, Column, Integer, String, VARCHAR, DateTime, BOOLEAN, FLOAT
+from sqlalchemy.orm import relationship
 
 from .. import db
 
@@ -20,6 +17,24 @@ from .. import db
 # Base.query = db_session.query_property()
 
 
+class Commodity(db.Model):
+    __tablename__ = 'commodity'
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    name = Column(VARCHAR(60))
+    price = Column(FLOAT)
+    product_id = Column(VARCHAR(30))
+    stock = Column(Integer)
+
+    category= Column(Integer,ForeignKey('commodity_category.id'))
+    commodity_category = relationship('Commodity_category',backref=db.backref('commodity', lazy='dynamic'))
+
+    status = Column(Integer)
+
+class Commodity_category(db.Model):
+    __tablename__ = 'commodity_category'
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    name = Column(VARCHAR(60))
+
 
 class User(db.Model):
     __tablename__ = 'user'
@@ -33,13 +48,15 @@ class User(db.Model):
     register_time = Column(DateTime)
     header_icon_url = Column(VARCHAR(60))
     sex = Column(Integer)
+    login_status = Column(BOOLEAN)
 
 
-    def __init__(self,phone_number,passwd):
+    def __init__(self,phone_number,passwd,login_status):
         self.nickname = 'abc'
         self.username = 'abc'
         self.phone_number = phone_number
         self.passwd = passwd
+        self.login_status = login_status
 
     # id = Column('id', Integer, primary_key=True)
     # phone_number = Column('phone_number', String(11), index=True)
