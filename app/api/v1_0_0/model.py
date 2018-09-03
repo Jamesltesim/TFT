@@ -21,10 +21,10 @@ class Model_v1_0_0:
 
     # 首页获取列表
     def homeList(self):
+        # 查询普通商品
         list = db.session.query(Commodity).all()
         dict = {}
         for obj in list:
-            print()
             key = obj.commodity_category.name
             if key in dict.keys():
                 pass
@@ -42,6 +42,18 @@ class Model_v1_0_0:
             obj_dict["category"] = key
             array.append(obj_dict)
 
+        # 查询推荐商品
+        recommend = db.session.query(Commodity_recommend).all()
+        rec_list = []
+        for obj in recommend:
+            print(obj.commodity.name)
+            dict1 = {}
+            dict1["name"] = obj.commodity.name
+            pass
+
+            rec_list.append(dict1)
+
+        dict["recommend"] = rec_list
         # print(dict)
         return jsonify({code:'200',"data":dict})
 

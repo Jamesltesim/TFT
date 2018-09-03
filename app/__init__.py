@@ -25,6 +25,9 @@ def create_app():
 
 
     # 蓝图
+    from app.admin import admin_api as admin_api_blueprint
+    app.register_blueprint(admin_api_blueprint, url_prefix='/api/admin')
+
     from app.api.v1_0_0 import api_v1_0_0 as api_1_0_blueprint
     app.register_blueprint(api_1_0_blueprint, url_prefix='/api/v1.0.0')
 

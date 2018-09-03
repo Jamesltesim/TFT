@@ -35,6 +35,36 @@ class Commodity_category(db.Model):
     id = Column(Integer, primary_key=True, autoincrement=True)
     name = Column(VARCHAR(60))
 
+class Commodity_recommend(db.Model):
+    __tablename__ = 'commodity_recommend'
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    commodity_id = Column(Integer,ForeignKey('commodity.id'))
+    commodity = relationship('Commodity', backref=db.backref('commodity_recommend', lazy='dynamic'))
+    desc = Column(VARCHAR(60))
+
+class Commodity_repertory(db.Model):
+    __tablename__ = 'commodity_repertory'
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    name = Column(VARCHAR(45))
+    # 进货价格
+    purchase_price = Column(FLOAT)
+    time = Column(DateTime)
+    operator = Column(Integer)
+    detail = Column(VARCHAR(80))
+    # 供货商
+    supplier = Column(VARCHAR(45))
+    expiration_date = Column(Integer)
+    product_id = Column(VARCHAR(45))
+
+    weight = Column(VARCHAR(20))
+
+    def __init__(self,name,purchase_price,operator,weight):
+        self.name = name
+        self.purchase_price = purchase_price
+        self.operator = operator
+        self.weight = weight
+        self.supplier = ''
+
 
 class User(db.Model):
     __tablename__ = 'user'
@@ -57,6 +87,7 @@ class User(db.Model):
         self.phone_number = phone_number
         self.passwd = passwd
         self.login_status = login_status
+
 
     # id = Column('id', Integer, primary_key=True)
     # phone_number = Column('phone_number', String(11), index=True)

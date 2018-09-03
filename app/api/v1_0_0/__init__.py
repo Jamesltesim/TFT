@@ -1,11 +1,7 @@
-from flask import Blueprint, jsonify
-
-from app import db
-from app.admin.model import User
+from flask import Blueprint
 
 api_v1_0_0 = Blueprint('api_v1_0_0',__name__)
 
-import hashlib
 from functools import wraps
 
 from flask import request, jsonify, current_app, g
