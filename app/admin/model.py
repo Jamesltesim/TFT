@@ -58,12 +58,18 @@ class Commodity_repertory(db.Model):
 
     weight = Column(VARCHAR(20))
 
-    def __init__(self,name,purchase_price,operator,weight):
-        self.name = name
-        self.purchase_price = purchase_price
-        self.operator = operator
-        self.weight = weight
+    def __init__(self):
+        # self.name = name
+        # self.purchase_price = purchase_price
+        # self.operator = operator
+        # self.weight = weight
         self.supplier = ''
+    # def __init__(self,name,purchase_price,operator,weight):
+    #     self.name = name
+    #     self.purchase_price = purchase_price
+    #     self.operator = operator
+    #     self.weight = weight
+    #     self.supplier = ''
 
 
 class User(db.Model):
@@ -87,6 +93,7 @@ class User(db.Model):
         self.phone_number = phone_number
         self.passwd = passwd
         self.login_status = login_status
+
 
 
     # id = Column('id', Integer, primary_key=True)

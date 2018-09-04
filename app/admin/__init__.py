@@ -1,10 +1,12 @@
 import datetime
+import json
 
 from flask import Blueprint, request, jsonify, abort
 
 from app.api.code_msg import code, msg
 from app import db
-from ..admin.model import Commodity_repertory
+from ..admin.model import Commodity_repertory, User
+
 admin_api = Blueprint('admin_api',__name__)
 
 @admin_api.route('/')
@@ -18,22 +20,51 @@ def hello_world():
 @admin_api.route('/addrepertory',methods=['POST'])
 def addRepertory():
 
-    # print(request.get_json(force=True))
-    name = request.get_json().get('name')
-    purchase_price = request.get_json().get('purchase_price')
-    operator = request.get_json().get('operator')
-    weight = request.get_json().get('weight')
+    print(request.get_json(force=True))
+    json_obj = request.get_json(force=True)
+    # print(json_obj)
 
-    repertory = Commodity_repertory(name,purchase_price,operator,weight)
-    repertory.time = datetime.datetime.now()
+    # user = User()
+
+    list = json_obj["json"]
+
     try:
-        db.session.add(repertory)
-        db.session.commit()
-        return jsonify({code: "200"})
+        for dict in list:
+            rep = dict2obj(Commodity_repertory(), dict)
+            rep.time = datetime.datetime.now()
+            db.session.add(rep)
     except Exception as e:
-        print(e)
-        return jsonify({code: "201", msg: "error"})
+        return jsonify({"code":"201"})
 
+    db.session.commit()
+
+
+    # print(rep.name)
+    # print(rep.weight)
+    # print(rep.operator)
+    # print(rep.purchase_price)
+
+    # name = request.get_json().get('name')
+    # purchase_price = request.get_json().get('purchase_price')
+    # operator = request.get_json().get('operator')
+    # weight = request.get_json().get('weight')
+    #
+    # repertory = Commodity_repertory(name,purchase_price,operator,weight)
+    # repertory.time = datetime.datetime.now()
+    # try:
+    #     db.session.add(repertory)
+    #     db.session.commit()
+    #     return jsonify({code: "200"})
+    # except Exception as e:
+    #     print(e)
+    #     return jsonify({code: "201", msg: "error"})
+
+    return jsonify({"code":"200"})
+
+# dict转obj，先初始化一个obj
+def dict2obj(obj,dict):
+    obj.__dict__.update(dict)
+    return obj
 # @admin_api.before_request
 # def before_request():
 #     if request.get_json() == None:
