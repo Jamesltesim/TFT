@@ -1,8 +1,12 @@
 # coding:utf-8
 import hashlib
+import random
 
 from flask import request, jsonify, current_app, g
 import time
+
+from sqlalchemy import and_, extract
+
 from app.admin.model import *
 from app.api.code_msg import *
 
@@ -14,6 +18,27 @@ class Model_v1_0_0:
 
     def hello_world(self):
         return 'v1.0.0'
+
+    def createOrder(self):
+        (nowTime,order_number) = self.generate_order_number()
+        print("生成的订单号：%s  日期:%s" %(nowTime,order_number))
+
+        try:
+            order = Order_reservation()
+            order.order_id = order_number
+            order.create_time = nowTime
+            order.arrival_time = nowTime
+            order.user_id = 10000
+            order.contact_number = '123'
+            order.receive_name = 'james'
+            order.address_id = 1
+            db.session.add(order)
+            db.session.commit()
+        except Exception as e:
+            return jsonify({"desc": "0"})
+
+
+        return jsonify({"desc":"1"})
 
     # 获取活动页列表
     def activityList(self):
@@ -130,5 +155,41 @@ class Model_v1_0_0:
         pipline.execute()
 
         return jsonify({'code': 1, 'message': '成功注销'})
+
+
+    ##########  内部方法
+
+    def generate_order_number(self):
+        import datetime
+        # nowTime = datetime.datetime.now().strftime('%Y%m%d')
+
+        nowTime = datetime.datetime.now()
+        year = nowTime.year
+        month = nowTime.month
+        day = nowTime.day
+        nowTime_ymd = nowTime.strftime('%Y%m%d')
+        nowTime_string = nowTime.strftime('%Y-%m-%d %H:%M:%S')
+
+        order_reservation =  Order_reservation.query.filter(and_(extract('year',Order_reservation.create_time) == year,
+                                                                 extract('month', Order_reservation.create_time) == month,
+                                                                 extract('day', Order_reservation.create_time) == day,)).\
+                                                    order_by(Order_reservation.id.desc()).first()
+        # print(order_reservation.order_id)
+
+        number = ''
+
+        if order_reservation != None:
+            str = order_reservation.order_id[9:]
+            num = int(str)
+            # print(num)
+            # 业务编号 + 年月日 + 随机自增
+            number = "%d%s%d" % (2, nowTime_ymd, num+random.randint(1, 100))
+        else:
+            # 业务编号 + 年月日 + 随机自增
+            number = "%d%s%d" % (2, nowTime_ymd, 10000+random.randint(10, 20))
+
+        # print(number)
+        return (nowTime_string,number)
+
 
 

@@ -24,10 +24,10 @@ def addRepertory():
     json_obj = request.get_json(force=True)
     # print(json_obj)
 
-    # user = User()
-
     list = json_obj["json"]
 
+    # 除了插入到仓库 还需要插入到商品列表和赠品列表
+    # 目前完成了插入到仓库
     try:
         for dict in list:
             rep = dict2obj(Commodity_repertory(), dict)

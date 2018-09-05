@@ -15,7 +15,12 @@ from ..v1_0_0.model import Model_v1_0_0
 
 model = Model_v1_0_0()
 
+@api_v1_0_0.route('/createOrder')
+def createOrder():
+    return model.createOrder()
 
+def homeList():
+    return model.homeList()
 @api_v1_0_0.route('/homelist')
 def homeList():
     return model.homeList()
@@ -42,7 +47,7 @@ def hello_world():
     # api = APITest('http://127.0.0.1:5001')
     # data = api.login('12345678901', '123456')
     # print(data.get('message'))
-
+    model.generate_order_number()
     return model.hello_world()
 
 

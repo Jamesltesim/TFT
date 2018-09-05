@@ -71,6 +71,22 @@ class Commodity_repertory(db.Model):
     #     self.weight = weight
     #     self.supplier = ''
 
+class Order_reservation(db.Model):
+    __tablename__ = 'order_reservation'
+    id = Column(Integer, primary_key=True)
+    order_id = Column(VARCHAR(45))
+
+    arrival_time = Column(DateTime)
+    create_time = Column(DateTime,default=datetime.now())
+
+    user_id = Column(Integer,ForeignKey('user.user_id'))
+    user = relationship('User', backref=db.backref('order_reservation', lazy='dynamic'))
+
+    contact_number = Column(VARCHAR(45))
+    receive_name = Column(VARCHAR(45))
+
+    address_id = Column(Integer)
+    # user_address = relationship('User_address', backref=db.backref('order_reservation', lazy='dynamic'))
 
 class User(db.Model):
     __tablename__ = 'user'
